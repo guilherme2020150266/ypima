@@ -19,10 +19,11 @@ export default function Step2() {
 				fetch(`https://api.nationalize.io/?name=${singleSelect.name.split(' ')[0]}`)
 					.then((resp) => resp.json())
 					.then(function (json) {
-						console.log(json);
-						setTranslateAnswer(
-							`${singleSelect.name} provavelmente é de ${json['country'][0]['country_id']}`
-						);
+						let countryPossibility = ``;
+						if (json['country'].length > 0) {
+							countryPossibility = ` provavelmente é de ${json['country'][0]['country_id']}`;
+						}
+						setTranslateAnswer(`${singleSelect.name}${countryPossibility}`);
 					});
 			}
 		});
